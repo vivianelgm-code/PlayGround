@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+  <meta name="theme-color" content="#071a30" />
+  <link rel="icon" href="data:," />
+  <title>Sunset Sprint — Kart Time Trial</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=DM+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <script type="importmap">
+    {"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js"}}
+  </script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main id="game">
+    <canvas id="scene" aria-label="3D kart racing game"></canvas>
+    <div class="vignette"></div>
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Sunset Sprint home"><span class="brand-mark">S</span><span>SUNSET<br><b>SPRINT</b></span></a>
+      <div class="race-label"><span class="live-dot"></span> TIME TRIAL <i>•</i> SOLO RUN</div>
+      <button id="soundBtn" class="sound-btn" aria-label="Toggle sound">♪ <span>SOUND ON</span></button>
+    </header>
+
+    <section class="hud" id="hud" aria-live="polite">
+      <div class="timer-card"><span class="eyebrow">TIME LEFT</span><strong id="timer">60.0</strong><span class="timer-unit">SEC</span></div>
+      <div class="lap-card"><span class="eyebrow">LAP</span><strong id="lap">1 <small>/ 3</small></strong><div class="lap-track"><i id="lapProgress"></i></div></div>
+      <div class="coin-card"><span class="coin-icon">✦</span><div><span class="eyebrow">COINS</span><strong id="coins">00</strong></div></div>
+      <div class="speed-card"><div class="speedometer"><svg viewBox="0 0 100 60" aria-hidden="true"><path d="M10 52 A40 40 0 0 1 90 52"/><path class="speed-fill" id="speedArc" d="M10 52 A40 40 0 0 1 90 52"/></svg><span id="speed">000</span><small>KM/H</small></div></div>
+    </section>
+
+    <aside class="mini-map" aria-label="Track map"><canvas id="map" width="180" height="116"></canvas><span class="map-label">CIRCUIT MAP</span></aside>
+    <div class="toast" id="toast"></div>
+    <div class="countdown" id="countdown"></div>
+
+    <section class="overlay intro" id="intro">
+      <div class="intro-copy">
+        <p class="kicker"><span>★</span> THE GOLDEN HOUR GRAND PRIX</p>
+        <h1>CHASE<br><em>THE SUN.</em></h1>
+        <p class="intro-text">One minute. Three laps. No second chances.<br>Find your line and leave the sunset behind.</p>
+        <button class="primary-btn" id="startBtn">START YOUR RUN <span>→</span></button>
+      </div>
+      <div class="intro-footer"><span><b>01</b> / 03 LAPS</span><span><b>60</b> SECOND SPRINT</span><span><b>∞</b> GOOD VIBES</span></div>
+      <div class="control-hint"><span class="keycap">W</span><span class="keycap">A</span><span class="keycap">S</span><span class="keycap">D</span><span class="or">or</span><span class="keycap wide">← ↑ ↓ →</span><span>TO DRIVE</span></div>
+    </section>
+
+    <section class="overlay result hidden" id="result">
+      <div class="result-panel">
+        <p class="kicker" id="resultKicker">TIME'S UP</p>
+        <h2 id="resultTitle">NICE<br><em>DRIVING.</em></h2>
+        <p class="result-copy" id="resultCopy">The track is yours. Take another lap?</p>
+        <div class="result-stats"><div><span>LAPS</span><b id="resultLaps">0</b></div><div><span>COINS</span><b id="resultCoins">0</b></div><div><span>BEST LAP</span><b id="resultBest">—</b></div></div>
+        <button class="primary-btn" id="againBtn">RACE AGAIN <span>↻</span></button>
+      </div>
+    </section>
+
+    <div class="bottom-hint" id="bottomHint"><span class="keycap">SPACE</span> <span>PAUSE</span><span class="hint-divider">·</span><span>R</span><span> RESTART</span></div>
+    <div class="touch-controls" id="touchControls">
+      <button class="touch-steer" data-key="ArrowLeft" aria-label="Steer left">‹</button>
+      <div class="touch-pedals"><button data-key="ArrowUp" class="pedal gas" aria-label="Accelerate">▲</button><button data-key="ArrowDown" class="pedal brake" aria-label="Brake">▼</button></div>
+      <button class="touch-steer" data-key="ArrowRight" aria-label="Steer right">›</button>
+    </div>
+    <div class="pause-chip hidden" id="pauseChip">PAUSED <span>•</span> PRESS SPACE TO RESUME</div>
+    <footer class="credits">A SUNNY-SIDE CIRCUIT <span>©</span> ORIGINAL KART TIME TRIAL</footer>
+  </main>
+  <script type="module" src="game.js"></script>
+</body>
+</html>
